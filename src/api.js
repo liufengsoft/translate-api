@@ -93,14 +93,11 @@ const getText = (text, opts)=>{
 			result.from.language.iso = body[8][0][0];
 		}
 
-		if (body[5] !== undefined && body[5][0] !== undefined && body[5][0][0] !== undefined) {
+		if (body[5] && body[5][0] && body[5][0][0]) {
 			let str = body[5][0][0];
-
 			str = str.replace(/<b><i>/g, '[');
 			str = str.replace(/<\/i><\/b>/g, ']');
-
 			result.from.text.value = str;
-
 			if (body[5][0][5] === 1) {
 					result.from.text.autoCorrected = true;
 			} else {
@@ -111,7 +108,6 @@ const getText = (text, opts)=>{
 		return result;
 	})
 	.catch(function (err) {
-		//console.log(err)
 		let e;
 		e = new Error();
 		if (err.statusCode !== undefined && err.statusCode !== 200) {
